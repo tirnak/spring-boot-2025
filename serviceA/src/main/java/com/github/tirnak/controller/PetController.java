@@ -2,6 +2,7 @@ package com.github.tirnak.controller;
 
 import com.github.tirnak.generated.api.PetsApi;
 import com.github.tirnak.generated.model.PetDto;
+import com.github.tirnak.generated.model.PetExtendedDto;
 import com.github.tirnak.service.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +16,22 @@ public class PetController implements PetsApi {
     private final PetService petService;
 
     @Override
-    public void createPets(PetDto pet) {
-        petService.save(pet);
+    public PetDto createPets(PetDto pet) {
+        return petService.save(pet);
     }
 
     @Override
     public List<PetDto> listPets(Integer limit) {
-        return List.of();
+        return petService.findAll(limit);
     }
 
     @Override
     public PetDto showPetById(Long petId) {
-        return PetsApi.super.showPetById(petId);
+        return petService.findById(petId);
+    }
+
+    @Override
+    public PetExtendedDto showPetExtendedById(Long petId) {
+        return petService.getExtendedPetById(petId);
     }
 }

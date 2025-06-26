@@ -1,3 +1,3 @@
 rootProject.name = "MyProject"
 
-include("serviceA", "serviceB")
+include("api", "serviceA", "serviceB")
